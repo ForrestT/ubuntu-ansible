@@ -1,0 +1,95 @@
+""""""""""""""""""""""""""
+"     Vundle Section     "
+""""""""""""""""""""""""""
+set nocompatible              " be iMproved, required
+filetype off                  " required
+
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
+" let Vundle manage Vundle, required
+Plugin 'VundleVim/Vundle.vim'           " Vundle itself
+Plugin 'morhetz/gruvbox'                " Gruvbox colorscheme
+Plugin 'scrooloose/nerdtree'		" File Tree
+Plugin 'tmhedberg/SimpylFold'           " Enhanced folding
+Plugin 'Valloric/YouCompleteMe'         " Auto-complete
+Plugin 'vim-syntastic/syntastic'        " syntax highlighting and checking
+Plugin 'nvie/vim-flake8'                " PEP-8
+Plugin 'vim-scripts/indentpython.vim'   " Auto-Indentation
+Plugin 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}		" Awesome status bar
+
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
+filetype plugin indent on    " required
+
+""""""""""""""""""""""""""
+"   END VUNDLE SECTION   "
+""""""""""""""""""""""""""
+
+" key remaps
+let mapleader=","
+
+" colorscheme config
+set background=dark                     " enable dark theme
+let g:gruvbox_contrast_dark='medium'    " set contrast to medium
+let g:gruvbox_italic=1                  " enable italics
+colorscheme gruvbox                     " ACTIVATE GRUVBOX!!!
+highlight Comment cterm=bold
+
+" Syntax stuff
+let python_highlight_all=1
+syntax enable
+
+"setting tabs to spaces at 4 spaces each for python files
+au BufNewFile,BufRead *.py
+    \ set tabstop=4  " number of visual  spaces / tab	
+    \ set softtabstop=4 " numbe of spaces / tab when editting
+    \ set expandtab " tabs are spaces
+    \ set shiftwidth=4 " something about lines beginning with tabs
+    \ set textwidth=119
+    \ set autoindent
+    \ set fileformat=unix
+
+" settings for other common fileformats
+au BufNewFile,BufRead *.yml, *.json, *.js, *.html, *.css
+    \ set tabstop=2
+    \ set softtabstop=2
+    \ set shiftwidth=2
+
+" Enable numbering that switches depending on mode
+set number relativenumber
+augroup numbertoggle
+  autocmd!
+  autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
+  autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
+augroup END
+
+
+set cursorline "highlight/underline the current line
+" set smarttab " attemtps to start next line at proper indent level
+
+filetype indent on " allow loading indent files that are specfic to (e.g.) .py files
+
+set wildmenu " adds some autocomplete
+
+set showmatch " shows matching brackets/paranthesis when higlighted
+
+set incsearch " incremental search as letters are entered
+set hlsearch " enables higlighting of search matches
+
+" Enable and configure folding
+set foldmethod=indent
+set foldlevel=99
+" Allow folding to be triggered by space rather than za
+nnoremap <space> za
+
+" You Complete Me configuration
+let g:ycm_autoclose_preview_window_after_completion=1
+map <leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>
+
+" NerdTree config
+let NERDTreeIgnore=['\.pyc$', '\~$'] 	" ignore files in NERDTree
+" toggle NERDtree with Ctrl+n
+map <C-n> :NERDTreeToggle<CR>
+

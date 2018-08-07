@@ -1,0 +1,51 @@
+---
+# Main task file for role: ubuntu1804
+
+  - name: Update Apt cache
+    apt:
+        update_cache: yes
+    when: run_apt_update
+
+  - name: Install packages via Apt
+    apt:
+        name: '{{ item }}'
+        state: latest
+    with_items: '{{ apt_packages }}'
+
+  - name: Install Python2.7 packages via PIP
+    pip:
+        name: '{{ item }}'
+        state: latest
+    become: False
+    with_items: '{{ pip_packages }}'
+
+  - name: Install SH Python packages from Bitbucket
+    pip:
+        name: '{{ item }}'
+        state: latest
+        editable: False
+    become: False
+    with_items: '{{ pip_bitbucket_packages }}'
+
+  - name: Clone Git Repos
+    git:
+        repo: '{{ item.value.url }}'
+        dest: '{{ item.value.path }}'
+        accept_hostkey: True
+        key_file: ~/.ssh/id_rsa
+        force: yes
+    become: False
+    with_dict: '{{ git_repo_dict }}'
+
+  - name: Copy .vimrc file
+    copy:
+        src: vimrc
+        dest: ~/.vimrc
+    become: False
+
+# The YouCompleteMe Vim Plugin needs to be compiled prior to use
+# https://github.com/Valloric/YouCompleteMe#ubuntu-linux-x64
+#
+# cd ~/.vim/bundle/YouCompleteMe
+# ./install.py --clang-completer
+#

@@ -1,0 +1,39 @@
+---
+# Variables for the ubuntu1804 role
+
+run_apt_update: True
+
+apt_packages:
+    - python
+    - python-dev
+    - python-pip
+    - python3-dev
+    - python3-pip
+    - ansible
+    - vim
+    - git
+    - tmux
+    - tree
+    - build-essential
+    - cmake
+    - fonts-hack-ttf
+
+pip_packages:
+    - boto3
+    - dnspython
+    - Flask
+    - futures
+    - requests
+
+pip_bitbucket_packages:
+    - "git+ssh://git@bitbucket.spectrum-health.org:7999/infdev/proteus.git#egg=proteus"
+    - "git+ssh://git@bitbucket.spectrum-health.org:7999/infdev/axapi.git#egg=axapi"
+    - "git+ssh://git@bitbucket.spectrum-health.org:7999/infdev/ise.git#egg=ise"
+    - "git+ssh://git@bitbucket.spectrum-health.org:7999/infdev/prime.git#egg=prime"
+    - "git+ssh://git@bitbucket.spectrum-health.org:7999/infdev/lieberman.git#egg=lieberman"
+
+git_repo_dict:
+    vundle:
+        url: https://github.com/VundleVim/Vundle.vim.git
+        path: ~/.vim/bundle/Vundle.vim
+
