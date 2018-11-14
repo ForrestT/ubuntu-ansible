@@ -17,6 +17,7 @@ Plugin 'Valloric/YouCompleteMe'         " Auto-complete
 Plugin 'vim-syntastic/syntastic'        " syntax highlighting and checking
 Plugin 'nvie/vim-flake8'                " PEP-8
 Plugin 'vim-scripts/indentpython.vim'   " Auto-Indentation
+Plugin 'Yggdroot/indentLine'		" Visual indentation guidelines
 Plugin 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}		" Awesome status bar
 
 " All of your Plugins must be added before the following line
@@ -86,6 +87,7 @@ nnoremap <space> za
 
 " You Complete Me configuration
 let g:ycm_autoclose_preview_window_after_completion=1
+let g:ycm_server_python_interpreter='/usr/bin/python'
 map <leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>
 
 " NerdTree config

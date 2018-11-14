@@ -24,7 +24,7 @@
         name: '{{ item }}'
         state: latest
         editable: False
-    become: False
+    # become: False
     with_items: '{{ pip_bitbucket_packages }}'
 
   - name: Clone Git Repos
